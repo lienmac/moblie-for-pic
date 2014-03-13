@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+*{ margin:0; padding:0; border:0; font-size:12px; line-height:1.6; font-family:"微软雅黑"; }
+p{ position:relative; margin-bottom:10px; }
+.box_txt{ width:200px; height:30px; border:1px solid #ddd; line-height:30px; text-indent:5px; }
+label{ position:absolute; left:5px; top:5px; color:#ccc; cursor:text; }
+.color_999{ color:#999; }
+</style>
+<script language="javascript" type="text/javascript" src="js/jquery.js"></script>
+<script language="javascript">
+jQuery.fn.extend({
+    propertychange: function(fn) {
+        if (!+ [1, ] != true) {
+            $(this).get(0).addEventListener("input", fn, false);
+        }
+        $(this).bind("propertychange", fn);
+        return this;
+    }
+});
+jQuery(function($){
+	$('.box_txt').each(function() {
+		if($(this).val()){
+			$(this).siblings('label').hide();
+		}else{
+			$('.box_txt,label').click(function(){
+				$(this).parent().find('label').addClass('color_999');
+				$(this).parent().find('.box_txt').focus();
+				$(this).parent().siblings('p').find('label').removeClass('color_999');
+			});
+			
+		}
+		
+		$(this).propertychange(function(){
+			if($(this).val()){
+				$(this).siblings('label').hide();
+			}else{
+				$(this).siblings('label').show().addClass('color_999');
+			}
+		});
+		
+		$(this).blur(function(){
+			$(this).siblings('label').removeClass('color_999');
+		});
+
+	});
+	
+	
+	
+});
+//	if('placeholder' in document.createElement('input')){
+//		alert('got');
+//	}else{
+//		alert('aaa');
+//	}
+	
+	
+</script>
+</head>
+
+<body>
+<div>
+<form>
+<p>
+	<input type="text" class="box_txt" placeholder="" />
+	<label>请输入职位名、公司名等关键字</label>
+</p>
+<p>
+	<input type="password" class="box_txt" />
+	<label>请输入职位名、公司名等关键字</label>
+</p>
+<p>
+	<input type="text" class="box_txt" />
+	<label>请输入职位名、公司名等关键字</label>
+</p>
+<p>
+	<input type="button" class="box_btn" />
+	<a href="http://www.baidu.com">baidu</a>
+</p>
+</form>
+</div>
+</body>
+</html>
